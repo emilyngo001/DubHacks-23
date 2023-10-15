@@ -1,115 +1,283 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ValueNotifier<bool> isSecondPageNotifier = ValueNotifier(false);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+      home: Scaffold(
+        body: AnimatedSwitcher(
+          duration: const Duration(seconds: 1),
+          child: ValueListenableBuilder<bool>(
+            valueListenable: isSecondPageNotifier,
+            builder: (context, isSecondPage, child) {
+              return isSecondPage ? SecondPageContent() : FirstPageContent();
+            },
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            isSecondPageNotifier.value = !isSecondPageNotifier.value;
+          },
+          child: const Icon(Icons.swap_horiz),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class FirstPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return Container(
+      key: UniqueKey(),
+      width: 500,
+      height: 700,
+      padding: const EdgeInsets.only(
+        top: 259,
+        left: 64,
+        right: 65,
+        bottom: 320,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(color: Color(0x49BBB0FF)),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          Text(
+            'Welcome!',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 40,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w400,
+              height: 0,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class SecondPageContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: UniqueKey(),
+      width: 412,
+      height: 732,
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(color: Colors.white),
+      child: Stack(
+        children: [
+          const Positioned(
+            left: 70,
+            top: 135,
+            child: Text(
+              'What are \nyour goals?',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                height: 0,
+              ),
+            ),
+          ),
+          const Positioned(
+            left: 70,
+            top: 273,
+            child: Text(
+              'Let’s personalize your affirmations\nbased on the goals that you choose',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                height: 0,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 92,
+            top: 337,
+            child: Container(
+              width: 227,
+              height: 41,
+              decoration: ShapeDecoration(
+                color: const Color(0x00D9D9D9),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 0.50),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 92,
+            top: 392,
+            child: Container(
+              width: 227,
+              height: 41,
+              decoration: ShapeDecoration(
+                color: const Color(0x00D9D9D9),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 0.50),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 92,
+            top: 447,
+            child: Container(
+              width: 227,
+              height: 40,
+              decoration: ShapeDecoration(
+                color: const Color(0x00D9D9D9),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 0.50),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 92,
+            top: 501,
+            child: Container(
+              width: 227,
+              height: 41,
+              decoration: ShapeDecoration(
+                color: const Color(0x00D9D9D9),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 0.50),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            left: 147,
+            top: 348,
+            child: SizedBox(
+              width: 118,
+              height: 21,
+              child: Text(
+                'Inspiration',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            left: 133,
+            top: 402,
+            child: SizedBox(
+              width: 146,
+              height: 21,
+              child: Text(
+                'Goal-oriented',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            left: 104,
+            top: 511,
+            child: SizedBox(
+              width: 203,
+              height: 21,
+              child: Text(
+                'Change-oriented',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 92,
+            top: 556,
+            child: Container(
+              width: 227,
+              height: 41,
+              decoration: ShapeDecoration(
+                color: const Color(0x00D9D9D9),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 0.50),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            left: 149,
+            top: 566,
+            child: SizedBox(
+              width: 114,
+              height: 21,
+              child: Text(
+                'Gratitude',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            left: 126,
+            top: 457,
+            child: SizedBox(
+              width: 159,
+              height: 21,
+              child: Text(
+                'Complementary',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
