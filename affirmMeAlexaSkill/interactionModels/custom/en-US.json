@@ -1,0 +1,59 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "AffirmMeIntent",
+          "samples": [
+            "affirmme",
+            "yes",
+            "i want an affirmation",
+            "affirmation",
+            "give me an affirmation",
+            "affirm me"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "GJIntent",
+          "samples": [
+            "I am not pushed by my problems I am led by my dreams",
+            "I am intelligent and focused",
+            "My actions are meaningful and inspiring",
+            "Each and every day I am getting closer to achieving my goals",
+            "Today will be a productive day",
+            "I am independent and self-sufficient",
+            "Today is a phenomenal day",
+            "I am inspiring people through my work",
+            "    I am living with abundance",
+            "  I am strong",
+            "I am successful"
+          ]
+        }
+      ],
+      "types": [],
+      "invocationName": "affirm me"
+    }
+  }
+}
