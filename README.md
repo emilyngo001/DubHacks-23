@@ -14,5 +14,5 @@ AffirmMe is a motivational, daily self-affirmation app that leverages voice-to-t
 
 - **Amazon Alexa Skill**: Handsfree affirmations using just your voice.
 
-# Figma Intended Design
+## Figma Intended Design
 ![DubHacks23](https://github.com/emilyngo001/DubHacks-23/assets/51425169/6e9ab1d3-cc13-4577-850e-52366c2821dd)
